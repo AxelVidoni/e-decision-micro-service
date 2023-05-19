@@ -29,12 +29,21 @@ public class UserController {
 	
 	//Récupération des infos d'un utilisateur
 	@GetMapping("utilisateur/{numeroUtilisateur}")
-	public Utilisateur getUtilisateurByNumero(@PathVariable("numeroUtilisateur") long numeroUtilisateur)
+	public Utilisateur getUtilisateurByNumero(@PathVariable("numeroUtilisateur") int numeroUtilisateur)
 	{
 		Utilisateur utilisateur = service.getUtilisateurByNumero(numeroUtilisateur);
 		return utilisateur;
 		
 	}
+	
+	//Récupération de l'id d'un utilisateur par rapport à son id authentification
+		@GetMapping("utilisateur/getId/{numeroAuthentUtilisateur}")
+		public int getIdUtilisateurByNumeroAuthent(@PathVariable("numeroAuthentUtilisateur") int numeroAuthentUtilisateur)
+		{
+			int idUtilisateur = service.getIdUtilisateurByNumeroAuthent(numeroAuthentUtilisateur);
+			return idUtilisateur;
+			
+		}
 	
 	//Création d'un utilisateur
 			@PostMapping("utilisateur")
@@ -46,7 +55,7 @@ public class UserController {
 	
 	//Suppression d'un utilisateur
 	@DeleteMapping("utilisateur/{numero}")
-	public String delete(@PathVariable("numero") long numero)
+	public String delete(@PathVariable("numero") int numero)
 	{
 		String result = service.delete(numero);
 		return result;
@@ -63,7 +72,7 @@ public class UserController {
 	
 	//Nouvelle requete de modification d'un attribut d'un utilisateur en utilisant des request param et en retournant une chaine de caractère
 	@PutMapping("utilisateur/{numero}")
-	public String modifyName(@PathVariable("numero") long numero , @RequestParam String nom)
+	public String modifyName(@PathVariable("numero") int numero , @RequestParam String nom)
 	{
 		String result = service.modifyName(numero, nom);
 		return result;
