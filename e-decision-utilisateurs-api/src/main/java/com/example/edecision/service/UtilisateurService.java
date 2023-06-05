@@ -20,20 +20,12 @@ public class UtilisateurService {
 	}
 	
 	//Récupération de toutes les infos d'un utilisateur
-	public Utilisateur getUtilisateurByNumero(int numeroUtilisateur)
+	public Utilisateur getUtilisateurByNumero(long numeroUtilisateur)
 	{
 		Utilisateur unUtilisateur = this.utilisateurRepo.getUtilisateurByNumero(numeroUtilisateur);
 
 		return unUtilisateur;
 	}
-	
-	//Récupération de l'id d'un utilisateur par rapport à son id authentification
-		public int getIdUtilisateurByNumeroAuthent(int numeroAuthentUtilisateur)
-		{
-			int idUtilisateur = this.utilisateurRepo.getIdUtilisateurByNumeroAuthent(numeroAuthentUtilisateur);
-
-			return idUtilisateur;
-		}
 	
 	//Création d'un utilisateur
 			public String createUtilisateur(Utilisateur unUtilisateur)
@@ -42,12 +34,12 @@ public class UtilisateurService {
 			}
 	
 	//Suppression d'un utilisateur
-	public String delete(int numero) {
+	public String delete(long numero) {
 		return this.utilisateurRepo.delete(numero);
 	}
 	
 	//Différentes méthodes pour modifier les attributs d'un utilisateur
-	public String modifyName(int numero, String name) {
+	public String modifyName(long numero, String name) {
 		return this.utilisateurRepo.modifyName(numero, name);
 	}
 

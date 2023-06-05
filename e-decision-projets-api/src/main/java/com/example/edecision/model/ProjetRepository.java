@@ -20,9 +20,9 @@ public class ProjetRepository {
 		return em.createQuery("SELECT p FROM Projets p", Projet.class).getResultList();
 	}
 	
-	public Projet getProjetByNumero(long numero)
+	public Projet getProjetById(int id)
 	{
-		Projet entity = em.find(Projet.class, numero);
+		Projet entity = em.find(Projet.class, id);
 		if (entity == null) {
 			return null;
 		}
@@ -43,10 +43,10 @@ public class ProjetRepository {
 		}
 
 	//Suppression d'un projet
-	public String delete(long numero) {
-		Projet entity = em.find(Projet.class, numero);
+	public String delete(int id) {
+		Projet entity = em.find(Projet.class, id);
 		if (entity == null) {
-			return "Numéro inconnu, veuillez réessayez";
+			return "Id inconnu, veuillez réessayez";
 		}
 		em.remove(entity);
 		return "Suppression réalisée";

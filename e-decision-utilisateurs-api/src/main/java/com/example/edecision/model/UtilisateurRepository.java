@@ -20,28 +20,13 @@ public class UtilisateurRepository {
 		return em.createQuery("SELECT v FROM Utilisateurs v", Utilisateur.class).getResultList();
 	}
 	
-	public Utilisateur getUtilisateurByNumero(int numero)
+	public Utilisateur getUtilisateurByNumero(long numero)
 	{
 		Utilisateur entity = em.find(Utilisateur.class, numero);
 		if (entity == null) {
 			return null;
 		}
 		return entity;
-	}
-	
-	public int getIdUtilisateurByNumeroAuthent(int numeroAuthentUtilisateur)
-	{
-		Utilisateur entity;
-		int idUtilisateur = -1;
-		try {
-		 entity = em.createQuery("SELECT p FROM Utilisateurs p WHERE p.id_authentification = :numeroAuthentUtilisateur", Utilisateur.class).setParameter("numeroAuthentUtilisateur", numeroAuthentUtilisateur).getSingleResult();
-		 idUtilisateur = entity.getId();
-		}
-		catch (Exception e)
-		{
-			entity = null;
-		}
-		return idUtilisateur;
 	}
 	
 	//Création d'un utilisateur
@@ -58,17 +43,17 @@ public class UtilisateurRepository {
 		}
 
 	//Suppression d'un utilisateur
-	public String delete(int numero) {
+	public String delete(long numero) {
 		Utilisateur entity = em.find(Utilisateur.class, numero);
 		if (entity == null) {
 			return "Numéro inconnu, veuillez réessayez";
 		}
 		em.remove(entity);
-		return "Suppression réalisée " + entity.getId();
+		return "Suppression réalisée";
 	}
 	
 	// méthode permettant de modifier un attribut de l'utilisateur ici le nom
-	public String modifyName(int numero , String name)
+	public String modifyName(long numero , String name)
 	{
 		if (name != null)
 		{
