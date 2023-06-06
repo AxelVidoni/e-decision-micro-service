@@ -20,9 +20,9 @@ public class ProjetService {
 	}
 	
 	//Récupération de toutes les infos d'un projet
-			public Projet getProjetByNumero(long numeroProjet)
+			public Projet getProjetById(int id)
 			{
-				Projet unProjet = this.projetRepo.getProjetByNumero(numeroProjet);
+				Projet unProjet = this.projetRepo.getProjetById(id);
 
 				return unProjet;
 			}
@@ -34,8 +34,8 @@ public class ProjetService {
 			}
 			
 			//Suppression d'un projet
-			public String delete(long numero) {
-				return this.projetRepo.delete(numero);
+			public String delete(int id) {
+				return this.projetRepo.delete(id);
 			}
 			
 			//Différentes méthodes pour modifier les attributs d'un projet

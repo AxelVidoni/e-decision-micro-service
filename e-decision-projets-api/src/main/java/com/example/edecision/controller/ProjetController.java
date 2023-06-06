@@ -29,10 +29,10 @@ public class ProjetController {
 	}
 	
 	//Récupération des infos d'un projet
-			@GetMapping("projet/{numeroProjet}")
-			public Projet getProjetByNumero(@PathVariable("numeroProjet") long numeroProjet)
+			@GetMapping("projet/{id}")
+			public Projet getProjetById(@PathVariable("id") int id)
 			{
-				Projet projet = service.getProjetByNumero(numeroProjet);
+				Projet projet = service.getProjetById(id);
 				return projet;
 				
 			}
@@ -46,10 +46,10 @@ public class ProjetController {
 			}
 			
 			//Suppression d'un projet
-			@DeleteMapping("projet/{numero}")
-			public String delete(@PathVariable("numero") long numero)
+			@DeleteMapping("projet/{id}")
+			public String delete(@PathVariable("id") int id)
 			{
-				String result = service.delete(numero);
+				String result = service.delete(id);
 				return result;
 			}
 			
@@ -63,11 +63,11 @@ public class ProjetController {
 //			}
 			
 			//Nouvelle requete de modification d'un attribut d'un projet en utilisant des request param et en retournant une chaine de caractère
-			@PutMapping("projet/{numero}")
-			public String modifyName(@PathVariable("numero") long numero , @RequestParam String nom)
-			{
-				String result = service.modifyName(numero, nom);
-				return result;
-			}
+//			@PutMapping("projet/{numero}")
+//			public String modifyName(@PathVariable("numero") long numero , @RequestParam String nom)
+//			{
+//				String result = service.modifyName(numero, nom);
+//				return result;
+//			}
 
 }
