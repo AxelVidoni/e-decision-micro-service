@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.edecision.model.Equipe;
 import com.example.edecision.model.EquipeRepository;
+import com.example.edecision.model.EquipeSimple;
 
 @Service
 public class EquipeService {
@@ -27,7 +28,7 @@ public class EquipeService {
 		}
 		
 		//Création d'une équipe
-		public String createEquipe(Equipe uneEquipe)
+		public String createEquipe(EquipeSimple uneEquipe)
 		{
 			return this.equipeRepo.createEquipe(uneEquipe);
 		}
@@ -38,8 +39,8 @@ public class EquipeService {
 		}
 		
 		//Différentes méthodes pour modifier les attributs d'une equipe
-		public String modifyName(int numero, String name) {
-			return this.equipeRepo.modifyName(numero, name);
+		public String addEquipier(int id, List<Integer> lesCoequipiers) {
+			return this.equipeRepo.addEquipier(id, lesCoequipiers);
 		}
 
 }

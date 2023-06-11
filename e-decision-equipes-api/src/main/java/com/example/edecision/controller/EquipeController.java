@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.edecision.model.Equipe;
+import com.example.edecision.model.EquipeSimple;
 import com.example.edecision.service.EquipeService;
 
 @RestController
@@ -37,7 +39,7 @@ public class EquipeController {
 		
 		//Création d'une équipe
 		@PostMapping("equipe")
-		public String ajoutEquipe(@RequestBody Equipe uneEquipe)
+		public String ajoutEquipe(@RequestBody EquipeSimple uneEquipe)
 		{
 			String result = service.createEquipe(uneEquipe);
 			return result;
@@ -61,10 +63,10 @@ public class EquipeController {
 //		}
 		
 		//Nouvelle requete de modification d'un attribut d'une equipe en utilisant des request param et en retournant une chaine de caractère
-		@PutMapping("equipe/{numero}")
-		public String modifyName(@PathVariable("numero") int numero , @RequestParam String nom)
+		@PutMapping("equipe/{id}")
+		public String addEquipier(@PathVariable("id") int id , @RequestBody List<Integer> lesCoequipiers)
 		{
-			String result = service.modifyName(numero, nom);
+			String result = service.addEquipier(id, lesCoequipiers);
 			return result;
 		}
 		

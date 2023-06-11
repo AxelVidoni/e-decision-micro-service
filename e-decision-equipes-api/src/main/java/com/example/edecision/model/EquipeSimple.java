@@ -6,44 +6,24 @@ import java.util.List;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
-import javax.persistence.Table;
 
-
-@Entity (name = "Equipes")
-@Table (name = "equipes")
-public class Equipe implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EquipeSimple{
+	
+	
 	private int id;
-	@Column
+	
 	private String name;
-	@Column 
+	
 	private int id_manager;
-	@Column 
+	
 	private int id_team_master;
-	@Column 
+	
 	private int id_projet;
 	
-//	@ManyToMany 
-//	@JoinTable( name = "equipiers",
-//    joinColumns = @JoinColumn( name = "id_equipe" ),
-//    inverseJoinColumns = @JoinColumn( name = "id_utilisateur" ) )
-	@ElementCollection
-	@CollectionTable(name="equipiers",
-	joinColumns = @JoinColumn(name="id_equipe"))
-	@Column(name = "id_utilisateur")
-	private List<Integer> lesParticipants;
 	
 	public int getId() {
 		return id;
@@ -77,12 +57,6 @@ public class Equipe implements Serializable {
 	public void setIdProjet(int id_projet) {
 		this.id_projet = id_projet;
 	}
-	public List<Integer> getListeEquipier() {
-		return lesParticipants;
-	}
-
-	public void setListeEquipier(List<Integer> lesParticipants) {
-		this.lesParticipants = lesParticipants;
-	}
+	
 	
 }

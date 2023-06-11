@@ -1,5 +1,6 @@
 package com.example.edecision.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,13 +31,23 @@ public class EquipeRepository {
 	}
 	
 	//Création d'une équipe
-	public String createEquipe(Equipe uneEquipe)
+	public String createEquipe(EquipeSimple uneEquipeS)
 	{
-		Equipe entity = em.find(Equipe.class, uneEquipe.getId());
+		Equipe entity = em.find(Equipe.class, uneEquipeS.getId());
 		if (entity != null) {
 			return "Equipe deja existante";
 		}
 		else {
+		//Transformation de l'équipe sans equipier en une equipe
+		//avec pour seul coéquipier le créateur
+		Equipe uneEquipe = new Equipe();
+		uneEquipe.setName(uneEquipeS.getName());
+		uneEquipe.setIdManager(uneEquipeS.getIdManager());
+		uneEquipe.setIdProjet(uneEquipeS.getIdProjet());
+		uneEquipe.setIdTeamMaster(uneEquipeS.getIdTeamMaster());
+		List<Integer> lesCoequipiers = new ArrayList<Integer>();
+		lesCoequipiers.add(uneEquipeS.getIdTeamMaster());
+		uneEquipe.setListeEquipier(lesCoequipiers);
 		em.persist(uneEquipe);
 		return "Ajout de l'équipe réalisée";
 	    }
@@ -53,20 +64,20 @@ public class EquipeRepository {
 	}
 	
 	// méthode permettant de modifier un attribut de l'équipe ici le nom
-	public String modifyName(int numero , String name)
+	public String addEquipier(int id , List<Integer> lesCoequipiers)
 	{
-		if (name != null)
+		if (lesCoequipiers != null)
 		{
-			Equipe entity = em.find(Equipe.class, numero);
+			Equipe entity = em.find(Equipe.class, id);
 		if (entity == null) {
-			return "Numéro inconnu, veuillez réessayez";
+			return "Id inconnu, veuillez réessayez";
 		}
-		entity.setName(name);
-		return "Modification du nom effectuée";
+		entity.setListeEquipier(lesCoequipiers);
+		return "Ajout des coéquipiers effectués";
 		}
 		else
 		{
-			return "Une équipe ne peut pas pas avoir de nom";
+			return "La liste de coéquipier est vide";
 		}
 	}
 
