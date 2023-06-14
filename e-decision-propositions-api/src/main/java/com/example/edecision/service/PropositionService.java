@@ -21,9 +21,9 @@ public class PropositionService {
 	}
 	
 	//Récupération de toutes les infos d'une proposition
-	public Proposition getPropositionByNumero(long numeroProjet)
+	public Proposition getPropositionById(int idProjet)
 	{
-		Proposition uneProposition = this.propositionRepo.getPropositionByNumero(numeroProjet);
+		Proposition uneProposition = this.propositionRepo.getPropositionById(idProjet);
 
 		return uneProposition;
 	}
@@ -35,13 +35,13 @@ public class PropositionService {
 			}
 	
 	//Suppression d'une proposition
-	public String delete(long numero) {
-		return this.propositionRepo.delete(numero);
+	public String delete(int id) {
+		return this.propositionRepo.delete(id);
 	}
 	
 	//Différentes méthodes pour modifier les attributs d'une proposition
-	public String modifyName(long numero, String name) {
-		return this.propositionRepo.modifyName(numero, name);
+	public String modifyEnonce(int id, String enonce) {
+		return this.propositionRepo.modifyEnonce(id, enonce);
 	}
 
 }

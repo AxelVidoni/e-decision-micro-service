@@ -30,10 +30,10 @@ public class PropositionController {
 	}
 	
 	//Récupération des infos d'une proposition
-	@GetMapping("proposition/{numeroProposition}")
-	public Proposition getPropositionByNumero(@PathVariable("numeroProposition") long numeroProposition)
+	@GetMapping("proposition/{idProposition}")
+	public Proposition getPropositionById(@PathVariable("idProposition") int idProposition)
 	{
-		Proposition proposition = service.getPropositionByNumero(numeroProposition);
+		Proposition proposition = service.getPropositionById(idProposition);
 		return proposition;
 		
 	}
@@ -47,10 +47,10 @@ public class PropositionController {
 			}
 	
 	//Suppression d'une proposition
-	@DeleteMapping("proposition/{numero}")
-	public String delete(@PathVariable("numero") long numero)
+	@DeleteMapping("proposition/{id}")
+	public String delete(@PathVariable("id") int id)
 	{
-		String result = service.delete(numero);
+		String result = service.delete(id);
 		return result;
 	}
 	
@@ -64,10 +64,10 @@ public class PropositionController {
 //	}
 	
 	//Nouvelle requete de modification d'un attribut d'une proposition en utilisant des request param et en retournant une chaine de caractère
-	@PutMapping("proposition/{numero}")
-	public String modifyName(@PathVariable("numero") long numero , @RequestParam String nom)
+	@PutMapping("proposition/{id}")
+	public String modifyName(@PathVariable("id") int id , @RequestParam String enonce)
 	{
-		String result = service.modifyName(numero, nom);
+		String result = service.modifyEnonce(id, enonce);
 		return result;
 	}
 
