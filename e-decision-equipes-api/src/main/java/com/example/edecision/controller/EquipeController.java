@@ -23,16 +23,17 @@ public class EquipeController {
 	@Autowired
 	private EquipeService service;
 
+	//Récupération de toutes les équipes
 	@GetMapping(value = "/equipes")
 	public List<Equipe> getEquipes() {
 		List<Equipe> lesEquipes = service.listEquipes(); 
 		return lesEquipes;
 	}
 	//Récupération des infos d'une équipe
-		@GetMapping("equipe/{numeroEquipe}")
-		public Equipe getEquipeByNumero(@PathVariable("numeroEquipe") int numeroEquipe)
+		@GetMapping("equipe/{idEquipe}")
+		public Equipe getEquipeById(@PathVariable("idEquipe") int idEquipe)
 		{
-			Equipe equipe = service.getEquipeByNumero(numeroEquipe);
+			Equipe equipe = service.getEquipeById(idEquipe);
 			return equipe;
 			
 		}
@@ -46,23 +47,15 @@ public class EquipeController {
 		}
 		
 		//Suppression d'une équipe
-		@DeleteMapping("equipe/{numero}")
-		public String delete(@PathVariable("numero") int numero)
+		@DeleteMapping("equipe/{id}")
+		public String delete(@PathVariable("id") int id)
 		{
-			String result = service.delete(numero);
+			String result = service.delete(id);
 			return result;
 		}
 		
-
-		//En commentaire première version des requetes de modification avec des path variables et avec un boolean en retour
-//		@PutMapping("equipe/{numero}/pv/")
-//		public Boolean modifyPv(@PathVariable("numero") int numero , @PathVariable("pointDeVie") int pointDeVie)
-//		{
-//			Boolean result = service.modifyPv(numero, pointDeVie);
-//			return result;
-//		}
 		
-		//Nouvelle requete de modification d'un attribut d'une equipe en utilisant des request param et en retournant une chaine de caractère
+		//Ajout des équipiers à l'équipe
 		@PutMapping("equipe/{id}")
 		public String addEquipier(@PathVariable("id") int id , @RequestBody List<Integer> lesCoequipiers)
 		{

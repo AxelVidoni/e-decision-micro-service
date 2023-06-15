@@ -22,6 +22,7 @@ public class ProjetController {
 	@Autowired
 	private ProjetService service;
 
+	//Récupération de tous les projets
 	@GetMapping(value = "/projets")
 	public List<Projet> getProjets() {
 		List<Projet> lesProjets = service.listProjets(); 
@@ -53,14 +54,6 @@ public class ProjetController {
 				return result;
 			}
 			
-
-			//En commentaire première version des requetes de modification avec des path variables et avec un boolean en retour
-//			@PutMapping("projet/{numero}/name/{name}")
-//			public Boolean modifyName(@PathVariable("numero") long numero , @PathVariable("name") String name)
-//			{
-//				Boolean result = service.modifyName(numero, name);
-//				return result;
-//			}
 			
 			//Nouvelle requete de modification d'un attribut d'un projet en utilisant des request param et en retournant une chaine de caractère
 //			@PutMapping("projet/{numero}")

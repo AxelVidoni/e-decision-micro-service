@@ -21,6 +21,7 @@ public class UserController {
 	@Autowired
 	private UtilisateurService service;
 
+	//Récupération de tous les utilisateurs
 	@GetMapping(value = "/utilisateurs")
 	public List<Utilisateur> getUsers() {
 		List<Utilisateur> lesUtilisateurs = service.listUtilisateurs(); 
@@ -28,19 +29,19 @@ public class UserController {
 	}
 	
 	//Récupération des infos d'un utilisateur
-	@GetMapping("utilisateur/{numeroUtilisateur}")
-	public Utilisateur getUtilisateurByNumero(@PathVariable("numeroUtilisateur") int numeroUtilisateur)
+	@GetMapping("utilisateur/{idUtilisateur}")
+	public Utilisateur getUtilisateurById(@PathVariable("idUtilisateur") int idUtilisateur)
 	{
-		Utilisateur utilisateur = service.getUtilisateurByNumero(numeroUtilisateur);
+		Utilisateur utilisateur = service.getUtilisateurById(idUtilisateur);
 		return utilisateur;
 		
 	}
 	
 	//Récupération de l'id d'un utilisateur par rapport à son id authentification
-		@GetMapping("utilisateur/getId/{numeroAuthentUtilisateur}")
-		public int getIdUtilisateurByNumeroAuthent(@PathVariable("numeroAuthentUtilisateur") int numeroAuthentUtilisateur)
+		@GetMapping("utilisateur/getId/{idAuthentUtilisateur}")
+		public int getIdUtilisateurByIdoAuthent(@PathVariable("idAuthentUtilisateur") int idAuthentUtilisateur)
 		{
-			int idUtilisateur = service.getIdUtilisateurByNumeroAuthent(numeroAuthentUtilisateur);
+			int idUtilisateur = service.getIdUtilisateurByIdAuthent(idAuthentUtilisateur);
 			return idUtilisateur;
 			
 		}
@@ -54,27 +55,20 @@ public class UserController {
 			}
 	
 	//Suppression d'un utilisateur
-	@DeleteMapping("utilisateur/{numero}")
-	public String delete(@PathVariable("numero") int numero)
+	@DeleteMapping("utilisateur/{id}")
+	public String delete(@PathVariable("id") int id)
 	{
-		String result = service.delete(numero);
+		String result = service.delete(id);
 		return result;
 	}
 	
 
-	//En commentaire première version des requetes de modification avec des path variables et avec un boolean en retour
-//	@PutMapping("utilisateur/{numero}/name/{name}")
-//	public Boolean modifyName(@PathVariable("numero") long numero , @PathVariable("name") String name)
-//	{
-//		Boolean result = service.modifyName(numero, name);
-//		return result;
-//	}
 	
-	//Nouvelle requete de modification d'un attribut d'un utilisateur en utilisant des request param et en retournant une chaine de caractère
-	@PutMapping("utilisateur/{numero}")
-	public String modifyName(@PathVariable("numero") int numero , @RequestParam String nom)
+	//Modification du nom d'un utilisateur
+	@PutMapping("utilisateur/{id}")
+	public String modifyName(@PathVariable("id") int id , @RequestParam String nom)
 	{
-		String result = service.modifyName(numero, nom);
+		String result = service.modifyName(id, nom);
 		return result;
 	}
 

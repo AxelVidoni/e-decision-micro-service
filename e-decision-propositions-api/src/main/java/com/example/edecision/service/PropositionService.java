@@ -15,15 +15,16 @@ public class PropositionService {
 	@Autowired
 	private PropositionRepository propositionRepo;
 	
+	//Récupération de toutes les propositions
 	public List<Proposition> listPropositions() {
 		List<Proposition> lesPropositions = this.propositionRepo.listPropositions();
 		return lesPropositions;
 	}
 	
 	//Récupération de toutes les infos d'une proposition
-	public Proposition getPropositionById(int idProjet)
+	public Proposition getPropositionById(int idProposition)
 	{
-		Proposition uneProposition = this.propositionRepo.getPropositionById(idProjet);
+		Proposition uneProposition = this.propositionRepo.getPropositionById(idProposition);
 
 		return uneProposition;
 	}

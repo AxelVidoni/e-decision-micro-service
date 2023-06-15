@@ -16,14 +16,16 @@ public class EquipeRepository {
 	@PersistenceContext
 	private EntityManager em;
 	
+	//Récupération de toutes les équipes
 	public List<Equipe> listEquipes()
 	{
 		return em.createQuery("SELECT e FROM Equipes e", Equipe.class).getResultList();
 	}
 	
-	public Equipe getEquipeByNumero(int numero)
+	//Récupération d'une équipe en fonction de son id
+	public Equipe getEquipeById(int id)
 	{
-		Equipe entity = em.find(Equipe.class, numero);
+		Equipe entity = em.find(Equipe.class, id);
 		if (entity == null) {
 			return null;
 		}
@@ -38,7 +40,7 @@ public class EquipeRepository {
 			return "Equipe deja existante";
 		}
 		else {
-		//Transformation de l'équipe sans equipier en une equipe
+		//Transformation de l'équipe simple (sans equipier) en une equipe
 		//avec pour seul coéquipier le créateur
 		Equipe uneEquipe = new Equipe();
 		uneEquipe.setName(uneEquipeS.getName());
@@ -53,17 +55,17 @@ public class EquipeRepository {
 	    }
 	}
 
-	//Suppression d'une equipe
-	public String delete(int numero) {
-		Equipe entity = em.find(Equipe.class, numero);
+	//Suppression d'une équipe
+	public String delete(int id) {
+		Equipe entity = em.find(Equipe.class, id);
 		if (entity == null) {
-			return "Numéro inconnu, veuillez réessayez";
+			return "Id inconnu, veuillez réessayez";
 		}
 		em.remove(entity);
 		return "Suppression réalisée";
 	}
 	
-	// méthode permettant de modifier un attribut de l'équipe ici le nom
+	// Ajout des coéquipiers à l'équipe
 	public String addEquipier(int id , List<Integer> lesCoequipiers)
 	{
 		if (lesCoequipiers != null)

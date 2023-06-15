@@ -15,26 +15,29 @@ public class UtilisateurRepository {
 	@PersistenceContext
 	private EntityManager em;
 	
+	//Récupération de tous les utilisateurs
 	public List<Utilisateur> listUtilisateurs()
 	{
 		return em.createQuery("SELECT v FROM Utilisateurs v", Utilisateur.class).getResultList();
 	}
 	
-	public Utilisateur getUtilisateurByNumero(int numero)
+	//Récupération d'un utilisateur en fonction de son id
+	public Utilisateur getUtilisateurById(int id)
 	{
-		Utilisateur entity = em.find(Utilisateur.class, numero);
+		Utilisateur entity = em.find(Utilisateur.class, id);
 		if (entity == null) {
 			return null;
 		}
 		return entity;
 	}
 	
-	public int getIdUtilisateurByNumeroAuthent(int numeroAuthentUtilisateur)
+	//Récupération de l'id d'un utilisateur en fonction de son id authentification
+	public int getIdUtilisateurByIdAuthent(int idAuthentUtilisateur)
 	{
 		Utilisateur entity;
 		int idUtilisateur = -1;
 		try {
-		 entity = em.createQuery("SELECT p FROM Utilisateurs p WHERE p.id_authentification = :numeroAuthentUtilisateur", Utilisateur.class).setParameter("numeroAuthentUtilisateur", numeroAuthentUtilisateur).getSingleResult();
+		 entity = em.createQuery("SELECT p FROM Utilisateurs p WHERE p.id_authentification = :idAuthentUtilisateur", Utilisateur.class).setParameter("idAuthentUtilisateur", idAuthentUtilisateur).getSingleResult();
 		 idUtilisateur = entity.getId();
 		}
 		catch (Exception e)
@@ -58,30 +61,30 @@ public class UtilisateurRepository {
 		}
 
 	//Suppression d'un utilisateur
-	public String delete(int numero) {
-		Utilisateur entity = em.find(Utilisateur.class, numero);
+	public String delete(int id) {
+		Utilisateur entity = em.find(Utilisateur.class, id);
 		if (entity == null) {
-			return "Numéro inconnu, veuillez réessayez";
+			return "Id inconnu, veuillez réessayez";
 		}
 		em.remove(entity);
 		return "Suppression réalisée " + entity.getId();
 	}
 	
-	// méthode permettant de modifier un attribut de l'utilisateur ici le nom
-	public String modifyName(int numero , String name)
+	// Modification du nom de l'utilisateur
+	public String modifyName(int id , String name)
 	{
 		if (name != null)
 		{
-			Utilisateur entity = em.find(Utilisateur.class, numero);
+			Utilisateur entity = em.find(Utilisateur.class, id);
 		if (entity == null) {
-			return "Numéro inconnu, veuillez réessayez";
+			return "Id inconnu, veuillez réessayez";
 		}
 		entity.setNom(name);
 		return "Modification du nom effectuée";
 		}
 		else
 		{
-			return "Un utilisateur ne peut pas pas avoir de nom";
+			return "Un utilisateur ne peut pas, ne pas avoir de nom";
 		}
 	}
 

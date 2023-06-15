@@ -35,33 +35,42 @@ public class Proposition implements Serializable {
     private String problematique;
     @Column
     private String resolution;
+    //Boolean pour savoir si c'est une proposition bloquante pour un projet
     @Column
     private Boolean block_project;
+    //Date de création de la proposition
     @Column
     @Temporal(TemporalType.DATE)
     private Date date_proposition;
-    @Column
-    private Boolean accepted;
+    //Boolean pour savoir si la proposition a été accepté
+    @Column(nullable = true)
+    private Boolean accepted = null;
+    //Permet de savoir combien de semaine cette proposition va être débattu
     @Column
     private int nbr_semaine_debat;
+    
+    //Liste des utilisateurs porteurs de la proposition
     @ElementCollection
     @CollectionTable(name="porteurs",
     joinColumns = @JoinColumn(name="id_proposition"))
     @Column(name = "id_utilisateur")
     private List<Integer> lesPorteurs;
+    
+    //Liste des utilisateurs soutiens de la proposition
     @ElementCollection
     @CollectionTable(name="soutiens",
     joinColumns = @JoinColumn(name="id_proposition"))
     @Column(name = "id_utilisateur")
     private List<Integer> lesSoutiens;
+    
+    //Liste des équipes impactées par la proposition
     @ElementCollection
     @CollectionTable(name="impactees",
     joinColumns =  @JoinColumn(name="id_proposition"))
     @Column(name = "id_equipe")
     private List<Integer> lesImpactees;
 
-    //@Schema(nullable = true,  example = "null", defaultValue = "null")
-    //@Column(name = "id_proposal", nullable=true)
+    //Proposition escaladée ou amendée
     @ManyToOne
     @JoinColumn(name = "id_proposal", referencedColumnName = "id", nullable = true)
     private Proposition proposal = null;

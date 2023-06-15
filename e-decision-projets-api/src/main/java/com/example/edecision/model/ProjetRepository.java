@@ -15,11 +15,13 @@ public class ProjetRepository {
 	@PersistenceContext
 	private EntityManager em;
 	
+	//Récupération de tous les projets
 	public List<Projet> listProjets()
 	{
 		return em.createQuery("SELECT p FROM Projets p", Projet.class).getResultList();
 	}
 	
+	//Récupération du projet en fonction de son id
 	public Projet getProjetById(int id)
 	{
 		Projet entity = em.find(Projet.class, id);
@@ -52,21 +54,21 @@ public class ProjetRepository {
 		return "Suppression réalisée";
 	}
 	
-	// méthode permettant de modifier un attribut du projet ici le nom
-	public String modifyName(long numero , String name)
+	// méthode permettant de modifier un attribut du projet 
+	public String modifyName(int id , String name)
 	{
 		if (name != null)
 		{
-			Projet entity = em.find(Projet.class, numero);
+			Projet entity = em.find(Projet.class, id);
 		if (entity == null) {
-			return "Numéro inconnu, veuillez réessayez";
+			return "Id inconnu, veuillez réessayez";
 		}
 		entity.setName(name);
 		return "Modification du nom effectuée";
 		}
 		else
 		{
-			return "Un projet ne peut pas pas avoir de nom";
+			return "Un projet ne peut pas, ne pas avoir de nom";
 		}
 	}
 

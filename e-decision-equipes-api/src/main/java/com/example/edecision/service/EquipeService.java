@@ -20,9 +20,9 @@ public class EquipeService {
 		return lesEquipes;
 	}
 	//Récupération de toutes les infos d'une equipe
-		public Equipe getEquipeByNumero(int numeroEquipe)
+		public Equipe getEquipeById(int id)
 		{
-			Equipe uneEquipe = this.equipeRepo.getEquipeByNumero(numeroEquipe);
+			Equipe uneEquipe = this.equipeRepo.getEquipeById(id);
 
 			return uneEquipe;
 		}
@@ -34,8 +34,8 @@ public class EquipeService {
 		}
 		
 		//Suppression d'une equipe
-		public String delete(int numero) {
-			return this.equipeRepo.delete(numero);
+		public String delete(int id) {
+			return this.equipeRepo.delete(id);
 		}
 		
 		//Différentes méthodes pour modifier les attributs d'une equipe

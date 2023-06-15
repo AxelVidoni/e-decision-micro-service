@@ -39,8 +39,8 @@ public class ProjetService {
 			}
 			
 			//Différentes méthodes pour modifier les attributs d'un projet
-			public String modifyName(long numero, String name) {
-				return this.projetRepo.modifyName(numero, name);
+			public String modifyName(int id, String name) {
+				return this.projetRepo.modifyName(id, name);
 			}
 
 }

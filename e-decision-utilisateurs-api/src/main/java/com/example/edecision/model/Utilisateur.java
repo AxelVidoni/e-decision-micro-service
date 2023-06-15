@@ -24,6 +24,7 @@ public class Utilisateur implements Serializable {
 	private String prenom;
 	@Column
 	private String adresse_mail;
+	//Id correspondant à son login + mdp
 	@Column
 	private int id_authentification;
 	

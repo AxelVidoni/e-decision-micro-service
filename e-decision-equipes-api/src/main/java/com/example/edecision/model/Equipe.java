@@ -28,17 +28,17 @@ public class Equipe implements Serializable {
 	private int id;
 	@Column
 	private String name;
+	// Utilisateur manageur de l'équipe
 	@Column 
 	private int id_manager;
+	//Utilisateur maitre de l'équipe
 	@Column 
 	private int id_team_master;
+	//Projet auquel l'équipe est rattachée
 	@Column 
 	private int id_projet;
 	
-//	@ManyToMany 
-//	@JoinTable( name = "equipiers",
-//    joinColumns = @JoinColumn( name = "id_equipe" ),
-//    inverseJoinColumns = @JoinColumn( name = "id_utilisateur" ) )
+
 	@ElementCollection
 	@CollectionTable(name="equipiers",
 	joinColumns = @JoinColumn(name="id_equipe"))

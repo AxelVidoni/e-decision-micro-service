@@ -20,11 +20,13 @@ public class PropositionRepository {
 	@PersistenceContext
 	private EntityManager em;
 	
+	//Récupération de toutes les propositions
 	public List<Proposition> listPropositions()
 	{
 		return em.createQuery("SELECT p FROM Propositions p", Proposition.class).getResultList();
 	}
 	
+	//Récupération d'une proposition
 	public Proposition getPropositionById(int id)
 	{
 		Proposition entity = em.find(Proposition.class, id);
@@ -71,7 +73,7 @@ public class PropositionRepository {
 		return "Suppression réalisée";
 	}
 	
-	// méthode permettant de modifier un attribut d'une proposition ici le nom
+	// méthode permettant de modifier l'énoncé d'une proposition
 	public String modifyEnonce(int id , String enonce)
 	{
 		if (enonce != null)
@@ -80,15 +82,21 @@ public class PropositionRepository {
 		if (entity == null) {
 			return "Id inconnu, veuillez réessayez";
 		}
+		//Verification qu'une proposition avec la meme problématique n'a pas été soumise
+		if (getPropositionByProblematique(enonce) != null)
+		{
+			return "Une proposition avec cette problématique a deja été soumise";
+		}
 		entity.setEnonce(enonce);
 		return "Modification de l'enonce effectuée";
 		}
 		else
 		{
-			return "Une proposition ne peut pas pas avoir d enonce";
+			return "Une proposition ne peut pas, ne pas avoir d'énoncé";
 		}
 	}
 	
+	//Récupération d'une proposition par rapport à sa problématique
 	public Proposition getPropositionByProblematique(String problematique)
 	{
 		Proposition entity;
@@ -101,6 +109,8 @@ public class PropositionRepository {
 		}
 		return entity;
 	}
+	
+	//Tentative de récupération de proposition par sa date
 //	public List<Proposition> getPropositionByDate(Date laDate)
 //	{
 //		List<Proposition> entity;

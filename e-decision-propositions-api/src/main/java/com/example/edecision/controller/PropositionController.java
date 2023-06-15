@@ -23,6 +23,7 @@ public class PropositionController {
 	@Autowired
 	private PropositionService service;
 
+	//Récupération de toutes les propositions
 	@GetMapping(value = "/propositions")
 	public List<Proposition> getPropositions() {
 		List<Proposition> lesPropositions = service.listPropositions(); 
@@ -55,15 +56,8 @@ public class PropositionController {
 	}
 	
 
-	//En commentaire première version des requetes de modification avec des path variables et avec un boolean en retour
-//	@PutMapping("proposition/{numero}/name/{name}")
-//	public Boolean modifyName(@PathVariable("numero") long numero , @PathVariable("name") String name)
-//	{
-//		Boolean result = service.modifyName(numero, name);
-//		return result;
-//	}
 	
-	//Nouvelle requete de modification d'un attribut d'une proposition en utilisant des request param et en retournant une chaine de caractère
+	//Nouvelle requete de modification d'un attribut d'une proposition 
 	@PutMapping("proposition/{id}")
 	public String modifyName(@PathVariable("id") int id , @RequestParam String enonce)
 	{
